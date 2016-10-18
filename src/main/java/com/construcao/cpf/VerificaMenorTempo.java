@@ -1,14 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.construcao.tempo;
-
-import com.construcao.cpf.Cpf;
-import com.construcao.cpf.Cpf;
-import com.construcao.cpf3.Cpf3;
-import com.construcao.cpf2.Cpf2;
+package com.construcao.cpf;
 
 /**
  * Classe que verifica qual tempo gasto pelo metodos cpf cf2 e cpf3, e retorna o
@@ -19,18 +9,21 @@ import com.construcao.cpf2.Cpf2;
  */
 public class VerificaMenorTempo {
     
+    
     /**
      * Metodo que pega o tempo de execucao do metodo cpf.
      * 
      * @param d - int[] - cpf a ser ultilizado.
      * @return - long - tempo de execucao.
+     * @throws Exception
      */
-    private static long getTempoCpf(int[] d) {
+    private static long getTempoCpf(int[] d) throws Exception{
         long tempoI, tempoF;
-        Cpf cpf1 = new Cpf();
+        
         tempoI = System.nanoTime();
-        for (int i = 0; i < 100000; i++) {
-            cpf1.cpf(d);
+        
+        for (int i = 0; i < 10000000; i++) {
+            Cpf.cpf(d);
         }
         tempoF = (System.nanoTime() - tempoI);
         return tempoF;
@@ -41,13 +34,15 @@ public class VerificaMenorTempo {
      * 
      * @param d - int[] - cpf a ser ultilizado.
      * @return - long - tempo de execucao.
+     * @throws Exception
      */
-    private static long getTempoCpf2(int[] d) {
+    private static long getTempoCpf2(int[] d) throws Exception{
         long tempoI, tempoF;
-        Cpf2 cpf2 = new Cpf2();
+        
         tempoI = System.nanoTime();
-        for (int i = 0; i < 100000; i++) {
-            cpf2.cpf2(d);
+        
+        for (int i = 0; i < 10000000; i++) {
+            Cpf.cpf2(d);
         }
         tempoF = (System.nanoTime() - tempoI);
         return tempoF;
@@ -58,13 +53,15 @@ public class VerificaMenorTempo {
      * 
      * @param d - int[] - cpf a ser ultilizado.
      * @return - long - tempo de execucao.
+     * @throws Exception
      */
-    private static long getTempoCpf3(int[] d) {
+    private static long getTempoCpf3(int[] d) throws Exception {
         long tempoI, tempoF;
-        Cpf3 cpf3 = new Cpf3();
+        
         tempoI = System.nanoTime();
-        for (int i = 0; i < 100000; i++) {
-            cpf3.cpf3(d);
+        
+        for (int i = 0; i < 10000000; i++) {
+            Cpf.cpf3(d);
         }
         tempoF = (System.nanoTime() - tempoI);
         return tempoF;
@@ -75,22 +72,23 @@ public class VerificaMenorTempo {
      * eficiente em questão de velocidade de execução.
      * 
      * @param d - int[] - cpf a ser ultilizado para verificar o tempo
-     * @return - String - qual o  metodo mais eficiente.
-     * @throws java.lang.Exception
+     * @return - int -  1 : cpf
+     *                  2 : cpf2
+     *                  3 : cpf3
+     * @throws Exception
      */
-    public static String menorTempo(int[] d)
-            throws Exception{
+    public static int menorTempo(int[] d) throws Exception{
 
         if (d.length == 11) {
 
             if (getTempoCpf(d) <= getTempoCpf2(d)
                     && getTempoCpf(d) <= getTempoCpf3(d)) {
-                return "cpf1 é o metodo mais rapido";
+                return 1;
             } else if (getTempoCpf2(d) <= getTempoCpf(d)
                     && getTempoCpf2(d) <= getTempoCpf3(d)) {
-                return "cpf2 é o metodo mais rapido";
+                return 2;
             } else {
-                return "cpf3 é o metodo mais rapido";
+                return 3;
             }
 
         } else {
